@@ -39,6 +39,16 @@
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
     </script>
 
+    <script>
+      function deletePost(id) {
+        var deleteForm = document.querySelector(`#deleteForm-${id}`);
+        var answer = confirm('Do you want to delete this post ?');
+        if(answer) {
+          deleteForm.submit();
+        }
+      }
+    </script>
+
 </body>
 
 </html>
