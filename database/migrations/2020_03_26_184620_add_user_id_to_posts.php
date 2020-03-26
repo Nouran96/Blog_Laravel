@@ -14,7 +14,7 @@ class AddUserIdToPosts extends Migration
     public function up()
     {
         Schema::table('posts', function (Blueprint $table) {
-            //
+            $table->unsignedBigInteger('user_id')->nullable();
         });
     }
 
