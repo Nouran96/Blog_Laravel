@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<form method="POST" action="" style="width: 60%; margin: 3rem auto;">
+<form method="POST" action="{{route('posts.store')}}" style="width: 60%; margin: 3rem auto;">
     @csrf
     <div class="form-group">
       <label >Title</label>
