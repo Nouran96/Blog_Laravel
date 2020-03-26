@@ -46,4 +46,14 @@ class PostController extends Controller
 
         return redirect()->route('posts.index');
     }
+
+    public function edit() {
+        $users = User::all();
+        $post = Post::find(request()->post);
+
+        return view('posts.edit', [
+            'users' => $users,
+            'post' => $post
+        ]);
+    }
 }

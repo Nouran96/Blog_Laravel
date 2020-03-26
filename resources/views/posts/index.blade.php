@@ -24,7 +24,7 @@
         <td>{{$post->created_at->toDateString()}}</td>
         <td>
           <a href="{{route('posts.show', ['post' => $post->id])}}" class="btn btn-primary btn-sm">View</a>
-          <a href="{{route('posts.show', ['post' => $post->id])}}" class="btn btn-warning btn-sm">Edit</a>
+          <a href="{{route('posts.edit', ['post' => $post->id])}}" class="btn btn-warning btn-sm">Edit</a>
           <a href="{{route('posts.show', ['post' => $post->id])}}" class="btn btn-danger btn-sm">Delete</a>
         </td>
         
