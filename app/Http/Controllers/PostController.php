@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\PostRequest;
 use App\Post;
 use App\User;
 
@@ -35,20 +36,7 @@ class PostController extends Controller
         ]);
     }
 
-    public function store(Request $request) {
-        // $request = request();
-
-        $validatedData = $request->validate([
-            'title' => 'required|min:3',
-            'description' => 'required|min:5'
-        ], [
-            'title.min' => 'Please the title has minimum of 3 characters',
-            'title.required' => 'Please Enter the title field',
-            'description.min' => 'Please the title has minimum of 5 characters',
-            'description.required' => 'Please Enter the description field'
-        ]);
-
-        // dd($validatedData);
+    public function store(PostRequest $request) {
 
         Post::create([
             'title' => $request->title,
@@ -69,8 +57,8 @@ class PostController extends Controller
         ]);
     }
 
-    public function update() {
-        $request = request();
+    public function update(PostRequest $request) {
+        // $request = request();
 
         Post::where('id', $request->post)->update([
             'title' => $request->title,
