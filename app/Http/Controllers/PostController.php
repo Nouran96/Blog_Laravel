@@ -11,8 +11,12 @@ class PostController extends Controller
     public function index() {
         $posts = Post::all();
 
+        $numOfPages = (int)ceil($posts->count() / 3);
+
         return view('posts.index', [
-            'posts'=> $posts
+            'posts'=> $posts,
+            'numOfPages' => $numOfPages,
+            'count' => 0
         ]);
     }
 
@@ -37,6 +41,16 @@ class PostController extends Controller
 
     public function store() {
         $request = request();
+
+        $validateData = $request->validate([
+            'title' => 'required|min:3',
+            'description' => 'required|min:5'
+        ], [
+            'title.min' => 'Please the title has minimum of 3 characters',
+            'title.required' => 'Please Enter the title field',
+            'description.min' => 'Please the title has minimum of 5 characters',
+            'description.required' => 'Please Enter the description field'
+        ]);
 
         Post::create([
             'title' => $request->title,
