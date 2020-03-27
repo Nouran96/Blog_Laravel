@@ -17,6 +17,7 @@
     </thead>
     <tbody>
     @foreach($posts as $post)
+      {{--@if($loop->index < 3*$count)--}}
       <tr>
         <th scope="row">{{$post->id}}</th>
         <td>{{$post->title}}</td>
@@ -34,9 +35,23 @@
         </td>
         
       </tr>
+      {{--@endif--}}
     @endforeach
     </tbody>
   </table>
+
+  <nav aria-label="Page navigation example">
+  <ul class="pagination my-3">
+    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+    @while($count <= $numOfPages)
+      <li class="page-item"><a class="page-link" href="#">{{$count}}</a></li>
+      @php
+        $count++
+      @endphp
+    @endwhile
+    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+  </ul>
+</nav>
 </div>
 
 @endsection
