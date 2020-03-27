@@ -17,7 +17,6 @@
     </thead>
     <tbody>
     @foreach($posts as $post)
-      {{--@if($loop->index < 3*$count)--}}
       <tr>
         <th scope="row">{{$post->id}}</th>
         <td>{{$post->title}}</td>
@@ -27,7 +26,6 @@
           <a href="{{route('posts.show', ['post' => $post->id])}}" class="btn btn-primary btn-sm">View</a>
           <a href="{{route('posts.edit', ['post' => $post->id])}}" class="btn btn-warning btn-sm">Edit</a>
           <form id="deleteForm-{{$post->id}}" method="POST" action="{{route('posts.destroy', ['post' => $post->id])}}" style="display:inline">
-            <!-- <a href="#" class="btn btn-danger btn-sm">Delete</a> -->
             @csrf
             {{method_field('DELETE')}}
             <button type="button" onclick="deletePost({{$post->id}})" class="btn btn-danger btn-sm">Delete</button>
@@ -35,23 +33,11 @@
         </td>
         
       </tr>
-      {{--@endif--}}
     @endforeach
     </tbody>
   </table>
 
-  <nav aria-label="Page navigation example">
-  <ul class="pagination my-3">
-    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-    @while($count <= $numOfPages)
-      <li class="page-item"><a class="page-link" href="#">{{$count}}</a></li>
-      @php
-        $count++
-      @endphp
-    @endwhile
-    <li class="page-item"><a class="page-link" href="#">Next</a></li>
-  </ul>
-</nav>
+{{ $posts->links() }}
 </div>
 
 @endsection

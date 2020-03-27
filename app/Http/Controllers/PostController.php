@@ -9,14 +9,10 @@ use App\User;
 class PostController extends Controller
 {
     public function index() {
-        $posts = Post::all();
-
-        $numOfPages = (int)ceil($posts->count() / 3);
+        $posts = Post::paginate(5);
 
         return view('posts.index', [
             'posts'=> $posts,
-            'numOfPages' => $numOfPages,
-            'count' => 1
         ]);
     }
 
