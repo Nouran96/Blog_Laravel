@@ -58,7 +58,6 @@ class PostController extends Controller
     }
 
     public function update(PostRequest $request) {
-        // $request = request();
 
         Post::where('id', $request->post)->update([
             'title' => $request->title,
