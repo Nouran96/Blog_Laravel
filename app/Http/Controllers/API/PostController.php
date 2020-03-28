@@ -15,7 +15,7 @@ class PostController extends Controller
 
         // Used in collection of model objects
         return PostResource::collection(
-            Post::all()
+            Post::paginate(5)
         );
     }
 
@@ -30,7 +30,6 @@ class PostController extends Controller
     }
 
     public function store(PostRequest $request) {
-        // $request = request();
 
         $post = Post::create($request->only(['title', 'description', 'user_id']));
 
