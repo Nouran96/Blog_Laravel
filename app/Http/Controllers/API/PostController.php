@@ -18,12 +18,13 @@ class PostController extends Controller
         );
     }
 
-    public function show() {
-        $postId = request()->post;
-
-        $post = Post::find($postId);
+    public function show($post) {
 
         // Used in single model object
-        return new PostResource($post);
+        return new PostResource(
+            Post::find(
+                $post // Url Parameter instead of request()->post
+            )
+        );
     }
 }
