@@ -15,7 +15,7 @@ class PostController extends Controller
 
         // Used in collection of model objects
         return PostResource::collection(
-            Post::paginate(5)
+            Post::with('user')->paginate(5) // Eager loading with pagination
         );
     }
 
