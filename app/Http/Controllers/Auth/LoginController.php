@@ -1,12 +1,14 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
+use Illuminate\Http\Request;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 use Socialite;
+use Google_Client;
 
 class LoginController extends Controller
 {
@@ -40,7 +42,12 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    public function redirectToProvider()
+    public function redirectToGoogle()
+    {
+        return Socialite::driver('google')->redirect();
+    }
+
+    public function redirectToGithub()
     {
         return Socialite::driver('github')->redirect();
     }
@@ -50,12 +57,24 @@ class LoginController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function handleProviderCallback()
-    {
+    public function handleGoogleCallback(Request $request)
+{
+        $user = Socialite::driver('google')->user();
+
+        // Set token for the Google API PHP Client
+        $google_client_token = [
+            'access_token' => $user->token,
+            'refresh_token' => $user->refreshToken,
+            'expires_in' => $user->expiresIn
+        ];
+
+        $client = new Google_Client();
+        $client->setApplicationName("Laravel Blog");
+        $client->setDeveloperKey(env('GOOGLE_API_KEY'));
+        $client->setAccessToken(json_encode($google_client_token));
+    }
+
+    public function handleGithubCallback() {
         $user = Socialite::driver('github')->user();
-
-        // return redirect()->route('posts.index');
-
-        // $user->token;
     }
 }
