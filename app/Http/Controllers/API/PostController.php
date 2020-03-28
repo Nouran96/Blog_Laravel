@@ -12,6 +12,18 @@ class PostController extends Controller
 {
     public function index() {
 
-        return PostResource::collection(Post::all());
+        // Used in collection of model objects
+        return PostResource::collection(
+            Post::all()
+        );
+    }
+
+    public function show() {
+        $postId = request()->post;
+
+        $post = Post::find($postId);
+
+        // Used in single model object
+        return new PostResource($post);
     }
 }
