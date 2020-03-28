@@ -4,9 +4,10 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\PostRequest;
 
-use App\Post;
 use App\Http\Resources\PostResource;
+use App\Post;
 
 class PostController extends Controller
 {
@@ -26,5 +27,13 @@ class PostController extends Controller
                 $post // Url Parameter instead of request()->post
             )
         );
+    }
+
+    public function store(PostRequest $request) {
+        // $request = request();
+
+        $post = Post::create($request->only(['title', 'description', 'user_id']));
+
+        return new PostResource($post);
     }
 }

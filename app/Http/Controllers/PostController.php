@@ -38,14 +38,6 @@ class PostController extends Controller
 
     public function store(PostRequest $request) {
 
-        // $validatedData = $request->validated();
-
-        // $post = new Post($validatedData);
-
-        // $post->save();
-
-        // dd($request->only(['title', 'description', 'user_id']));
-
         Post::create($request->only(['title', 'description', 'user_id']));
 
         return redirect()->route('posts.index');
